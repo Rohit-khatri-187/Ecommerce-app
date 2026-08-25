@@ -1,0 +1,8 @@
+- [x] Create `components` package in `detailsscreen`
+- [x] Create `ProductDetailHeader.kt`
+- [x] Create `ProductDetailInfo.kt`
+- [x] Create `ProductDetailDescription.kt`
+- [x] Create `ProductDetailBottomBar.kt`
+- [x] Update `DetailsScreen.kt` to use new components
+- [x] Update `NavGraph.kt` to pass `onBackClick`
+- [x] Verify build and UI
