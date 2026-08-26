@@ -1,4 +1,4 @@
-package com.rohit.ecom.data.remote.dto
+package com.rohit.ecom.data.remote.products.dto
 
 data class Product(
     val category: String,

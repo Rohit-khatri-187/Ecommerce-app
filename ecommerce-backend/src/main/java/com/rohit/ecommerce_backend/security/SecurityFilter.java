@@ -33,6 +33,7 @@ public class SecurityFilter {
                         auth
 
                                 .requestMatchers("/login", "/register","/h2-console/**").permitAll()
+                                .requestMatchers("/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

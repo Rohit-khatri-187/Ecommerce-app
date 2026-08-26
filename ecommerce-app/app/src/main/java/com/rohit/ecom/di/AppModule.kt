@@ -1,7 +1,7 @@
 package com.rohit.ecom.di
 
-import com.rohit.ecom.data.remote.ProductsApi
-import com.rohit.ecom.data.remote.repository.ProductsRepositoryImpl
+import com.rohit.ecom.data.remote.products.ProductsApi
+import com.rohit.ecom.data.remote.products.repository.ProductsRepositoryImpl
 import com.rohit.ecom.domain.repository.ProductsRepository
 import com.rohit.ecom.domain.usecases.GetProductById
 import com.rohit.ecom.domain.usecases.GetProducts

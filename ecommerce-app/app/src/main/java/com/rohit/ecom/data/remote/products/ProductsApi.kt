@@ -1,7 +1,7 @@
-package com.rohit.ecom.data.remote
+package com.rohit.ecom.data.remote.products
 
-import com.rohit.ecom.data.remote.dto.Product
-import com.rohit.ecom.data.remote.dto.ProductsResponse
+import com.rohit.ecom.data.remote.products.dto.Product
+import com.rohit.ecom.data.remote.products.dto.ProductsResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

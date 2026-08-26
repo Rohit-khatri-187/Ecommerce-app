@@ -1,7 +1,7 @@
 package com.rohit.ecom.domain.repository
 
 import androidx.paging.PagingData
-import com.rohit.ecom.data.remote.dto.Product
+import com.rohit.ecom.data.remote.products.dto.Product
 import kotlinx.coroutines.flow.Flow
 
 interface ProductsRepository {
