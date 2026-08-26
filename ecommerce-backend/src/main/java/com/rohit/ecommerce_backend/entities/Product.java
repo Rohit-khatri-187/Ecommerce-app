@@ -1,28 +1,21 @@
 package com.rohit.ecommerce_backend.entities;
 
+import com.rohit.ecommerce_backend.utils.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.time.Instant;
-
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "products")
-public class Product {
-
-    @Id
-    private Long id;
+public class Product extends BaseEntity {
 
     private String name;
 
@@ -35,15 +28,6 @@ public class Product {
 
     @Column(name = "image_url")
     private String imageUrl;
-
-    @Column(name = "created_date")
-    @CreationTimestamp
-    private Instant createdDate;
-
-    @Column(name = "updated_date")
-    @UpdateTimestamp
-    private Instant updatedDate;
-
 
 
 }
