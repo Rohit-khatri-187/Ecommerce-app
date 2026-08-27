@@ -7,15 +7,44 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.rohit.ecom.presentation.screens.detailsscreen.DetailsScreen
 import com.rohit.ecom.presentation.screens.homescreen.HomeScreen
+import com.rohit.ecom.presentation.screens.loginscreen.LoginScreen
+import com.rohit.ecom.presentation.screens.signupscreen.SignUpScreen
 
 @Composable
-fun NavGraph() {
+fun NavGraph(
+    startDestination: Route
+) {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = Route.HomeScreen
+        startDestination = startDestination
     ) {
+        
+        composable<Route.SignUpScreen>{
+            SignUpScreen(
+                onHaveAnAccountClick = {
+                    navController.navigate(Route.LoginScreen)
+                },
+                onSuccessfulSignUp = {
+                    navController.navigate(Route.LoginScreen)
+                }
+            )
+        }
+
+        composable<Route.LoginScreen>{
+            LoginScreen(
+                onDontHaveAnAccountClick = {
+                    navController.navigate(Route.SignUpScreen)
+                },
+                onSuccessfulLogin = {
+                    navController.navigate(Route.HomeScreen) {
+                        popUpTo(Route.LoginScreen) { inclusive = true }
+                    }
+                }
+            )
+        }
+        
         composable<Route.HomeScreen> {
             HomeScreen(
                 onProductClick = { productId ->

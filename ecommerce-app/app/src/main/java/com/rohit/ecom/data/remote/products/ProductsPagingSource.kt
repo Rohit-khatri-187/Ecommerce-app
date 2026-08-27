@@ -1,8 +1,8 @@
-package com.rohit.ecom.data.remote
+package com.rohit.ecom.data.remote.products
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.rohit.ecom.data.remote.dto.Product
+import com.rohit.ecom.data.remote.products.dto.Product
 
 class ProductsPagingSource(
     private val productsApi: ProductsApi

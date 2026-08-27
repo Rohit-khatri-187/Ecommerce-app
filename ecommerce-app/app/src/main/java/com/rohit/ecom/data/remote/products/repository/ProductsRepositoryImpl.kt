@@ -1,12 +1,12 @@
-package com.rohit.ecom.data.remote.repository
+package com.rohit.ecom.data.remote.products.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.rohit.ecom.data.remote.ProductsApi
-import com.rohit.ecom.data.remote.ProductsPagingSource
-import com.rohit.ecom.data.remote.dto.Product
-import com.rohit.ecom.domain.repository.ProductsRepository
+import com.rohit.ecom.data.remote.products.ProductsApi
+import com.rohit.ecom.data.remote.products.ProductsPagingSource
+import com.rohit.ecom.data.remote.products.dto.Product
+import com.rohit.ecom.domain.products.repository.ProductsRepository
 import kotlinx.coroutines.flow.Flow
 
 class ProductsRepositoryImpl(

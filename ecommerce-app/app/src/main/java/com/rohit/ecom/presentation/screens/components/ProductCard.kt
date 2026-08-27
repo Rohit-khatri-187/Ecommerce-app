@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.rohit.ecom.data.remote.dto.Product
+import com.rohit.ecom.data.remote.products.dto.Product
 
 @Composable
 fun ProductCard(

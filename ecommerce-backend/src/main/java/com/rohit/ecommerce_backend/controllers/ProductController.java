@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<PagedResponse<Product>> getAllProducts(
-            @PageableDefault(page = 1, size = 20) Pageable pageable) {
+            @PageableDefault(page = 0, size = 20) Pageable pageable) {
 
         PagedResponse<Product> response = productService.getAllProducts(pageable);
         return ResponseEntity.ok(response);

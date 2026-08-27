@@ -1,6 +1,7 @@
 package com.rohit.ecommerce_backend.utils;
 
 import com.rohit.ecommerce_backend.entities.User;
+import com.rohit.ecommerce_backend.security.CustomUserDetail;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,9 @@ public class SecurityUtils {
             throw new RuntimeException("User is not authenticated");
         }
 
-        return (User) authentication.getPrincipal();
+        CustomUserDetail customUserDetail = (CustomUserDetail) authentication.getPrincipal();
+
+        return customUserDetail.getUser();
     }
 
 }

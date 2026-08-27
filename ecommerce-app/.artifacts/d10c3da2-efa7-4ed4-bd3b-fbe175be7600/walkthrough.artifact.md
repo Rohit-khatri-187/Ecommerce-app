@@ -1,51 +1,39 @@
-# Immersive Modular Product Details Screen
+# Authentication Screens Redesign Walkthrough
 
-I have implemented a professional, modular Product Details screen following Material 3 design principles and Android best practices. The UI is decomposed into several standalone components to ensure maintainability and readability.
+I have redesigned the `LoginScreen` and `SignUpScreen` with a modern, professional e-commerce aesthetic.
 
-## Architectural Highlights
+## Visual Changes
 
-- **Component-Based UI**: The screen is built by combining independent components, each focused on a specific part of the product information.
-- **State Coordination**: `DetailsScreen.kt` acts as the single source of truth, observing the `ViewModel`'s state and delegating to the specialized components.
-- **Improved UX**: Added a persistent bottom bar for quick actions and an immersive header with back navigation.
+### 1. New Brand Color Palette
+Updated the theme to use a **Royal Blue** and **Deep Teal** combination.
+- **Primary**: Vibrant Blue (#005AC1) for actions and highlights.
+- **Background**: Soft Gray (#F5F7FA) for a clean, premium feel.
+- **Surface**: Pure White (#FFFFFF) for inputs and cards.
 
-## New Components
+### 2. Pill-Shaped Design
+Following modern UI trends, all interactive elements now have fully rounded (pill-shaped) corners.
+- `OutlinedTextField` shapes are set to `RoundedCornerShape(50)`.
+- Action buttons are set to `RoundedCornerShape(50)`.
 
-### 1. ProductDetailHeader
-Displays the product image with a parallax-ready `ContentScale.Crop` and a floating back button overlay.
-[ProductDetailHeader.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/detailsscreen/components/ProductDetailHeader.kt)
+### 3. Inline Loading Indicators
+Improved user feedback during network calls:
+- The "Login" and "Sign Up" buttons no longer disappear when loading.
+- Instead, the button remains visible, but the text is replaced by a `CircularProgressIndicator` centered inside the button.
+- This prevents UI layout shifts and provides a more stable experience.
 
-### 2. ProductDetailInfo
-Handles the core product metadata: Name, Category badge, and a dynamic Stock status indicator.
-[ProductDetailInfo.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/detailsscreen/components/ProductDetailInfo.kt)
+### 4. Precise Clickable Footer Links
+Used `AnnotatedString` and `ClickableText` to ensure that only the navigation keywords are active.
+- Only "Sign Up" or "Login" are underlined and clickable.
+- The surrounding "Don't have an account?" text is static, preventing accidental clicks.
 
-### 3. ProductDetailDescription
-A dedicated, selectable text area for the product description, ensuring accessibility and ease of reading.
-[ProductDetailDescription.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/detailsscreen/components/ProductDetailDescription.kt)
+## Files Modified
 
-### 4. ProductDetailBottomBar
-Pops up at the bottom of the screen with "Add to Cart" and "Buy Now" actions, providing a clear path to conversion.
-[ProductDetailBottomBar.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/detailsscreen/components/ProductDetailBottomBar.kt)
+- [Color.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/ui/theme/Color.kt): Added new brand colors.
+- [Theme.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/ui/theme/Theme.kt): Applied the new color scheme.
+- [LoginScreen.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/loginscreen/LoginScreen.kt): Redesigned the login form.
+- [SignUpScreen.kt](file:///home/rohit/Desktop/Android-projects/Ecommerce/ecommerce-app/app/src/main/java/com/rohit/ecom/presentation/screens/signupscreen/SignUpScreen.kt): Redesigned the registration form.
 
-## Coordination
-
-The `DetailsScreen` success state now uses a `Scaffold` to tie everything together:
-
-```kotlin
-is ApiResult.Success -> {
-    Scaffold(
-        bottomBar = { ProductDetailBottomBar(...) }
-    ) { paddingValues ->
-        Column(modifier = Modifier.verticalScroll(...)) {
-            ProductDetailHeader(...)
-            ProductDetailInfo(...)
-            ProductDetailDescription(...)
-        }
-    }
-}
-```
-
-## Verification Results
-
-- **Build Status**: ✅ `app:assembleDebug` SUCCESS
-- **Loading State**: ✅ Properly displays a centered `CircularProgressIndicator`.
-- **Navigation**: ✅ `onBackClick` is wired through `NavGraph` to correctly return to the Home screen.
+## Verification
+- **Build**: ✅ Successfully built `app:assembleDebug`.
+- **UI Check**: Fully rounded components verified.
+- **Logic Check**: Loading states and navigation links verified.
