@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.rohit.ecom.data.remote.products.dto.Product
-import com.rohit.ecom.domain.usecases.ProductsUseCases
+import com.rohit.ecom.domain.products.usecases.ProductsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

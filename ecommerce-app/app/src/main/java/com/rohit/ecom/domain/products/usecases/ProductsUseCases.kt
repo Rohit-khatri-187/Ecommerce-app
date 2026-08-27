@@ -1,4 +1,4 @@
-package com.rohit.ecom.domain.usecases
+package com.rohit.ecom.domain.products.usecases
 
 class ProductsUseCases(
     val getProducts: GetProducts,

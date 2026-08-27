@@ -24,6 +24,8 @@ public class Product extends BaseEntity {
 
     private String category;
 
+    private Long price;
+
     private Integer stock;
 
     @Column(name = "image_url")

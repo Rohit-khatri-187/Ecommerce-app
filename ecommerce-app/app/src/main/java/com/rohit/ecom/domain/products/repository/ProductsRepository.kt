@@ -1,4 +1,4 @@
-package com.rohit.ecom.domain.repository
+package com.rohit.ecom.domain.products.repository
 
 import androidx.paging.PagingData
 import com.rohit.ecom.data.remote.products.dto.Product

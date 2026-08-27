@@ -65,6 +65,8 @@ dependencies {
 
 //    implementation(libs.core.splashscreen)
 
+    implementation(libs.androidx.datastore.preferences)
+
     implementation(libs.navigation.compose)
     implementation(libs.androidx.material.icons.core)
     implementation(libs.androidx.material.icons.extended)
