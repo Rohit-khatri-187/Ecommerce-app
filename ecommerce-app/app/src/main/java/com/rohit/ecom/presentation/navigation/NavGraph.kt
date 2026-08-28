@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.rohit.ecom.presentation.screens.cartScreen.CartScreen
 import com.rohit.ecom.presentation.screens.detailsscreen.DetailsScreen
 import com.rohit.ecom.presentation.screens.homescreen.HomeScreen
 import com.rohit.ecom.presentation.screens.loginscreen.LoginScreen
@@ -49,6 +50,9 @@ fun NavGraph(
             HomeScreen(
                 onProductClick = { productId ->
                     navController.navigate(Route.DetailsScreen(productId))
+                },
+                onCartClick = {
+                    navController.navigate(Route.CartScreen)
                 }
             )
         }
@@ -59,6 +63,19 @@ fun NavGraph(
                 productId = route.productId,
                 onBackClick = {
                     navController.navigateUp()
+                }
+            )
+        }
+
+        composable<Route.CartScreen> {
+            CartScreen(
+                onBackClick = {
+                    navController.navigateUp()
+                },
+                onShopNowClick = {
+                    navController.navigate(Route.HomeScreen) {
+                        popUpTo(Route.CartScreen) { inclusive = true }
+                    }
                 }
             )
         }

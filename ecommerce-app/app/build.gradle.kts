@@ -63,6 +63,9 @@ dependencies {
 
     implementation(libs.retrofit.core)
 
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
+
 //    implementation(libs.core.splashscreen)
 
     implementation(libs.androidx.datastore.preferences)
