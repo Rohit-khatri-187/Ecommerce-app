@@ -19,4 +19,7 @@ sealed class Route {
     @Serializable
     data object CartScreen : Route()
 
+    @Serializable
+    data object ProfileScreen : Route()
+
 }

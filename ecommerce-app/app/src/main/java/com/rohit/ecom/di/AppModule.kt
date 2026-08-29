@@ -9,6 +9,8 @@ import com.rohit.ecom.data.remote.cart.repository.CartRepositoryImpl
 import com.rohit.ecom.data.remote.interceptors.AuthInterceptor
 import com.rohit.ecom.data.remote.products.ProductsApi
 import com.rohit.ecom.data.remote.products.repository.ProductsRepositoryImpl
+import com.rohit.ecom.data.remote.profile.ProfileApi
+import com.rohit.ecom.data.remote.profile.repository.ProfileRepositoryImpl
 import com.rohit.ecom.domain.auth.repository.AuthRepository
 import com.rohit.ecom.domain.auth.usecases.AuthUseCases
 import com.rohit.ecom.domain.auth.usecases.LoginUseCase
@@ -23,6 +25,10 @@ import com.rohit.ecom.domain.products.repository.ProductsRepository
 import com.rohit.ecom.domain.products.usecases.GetProductById
 import com.rohit.ecom.domain.products.usecases.GetProducts
 import com.rohit.ecom.domain.products.usecases.ProductsUseCases
+import com.rohit.ecom.domain.profile.repository.ProfileRepository
+import com.rohit.ecom.domain.profile.usecases.GetProfileUseCase
+import com.rohit.ecom.domain.profile.usecases.ProfileUseCases
+import com.rohit.ecom.domain.profile.usecases.UpdateProfileUseCase
 import com.rohit.ecom.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -89,6 +95,12 @@ object AppModule{
 
     @Provides
     @Singleton
+    fun providesProfileApi(retrofit: Retrofit): ProfileApi{
+        return retrofit.create(ProfileApi::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideTokenPref(dataStore: DataStore<Preferences>): TokenPref {
         return TokenPrefImpl(dataStore)
     }
@@ -109,6 +121,12 @@ object AppModule{
     @Singleton
     fun provideCartRepository(cartApi: CartApi): CartRepository{
         return CartRepositoryImpl(cartApi)
+    }
+
+    @Provides
+    @Singleton
+    fun  provideProfileRepository(profileApi : ProfileApi): ProfileRepository{
+        return ProfileRepositoryImpl(profileApi);
     }
 
     @Provides
@@ -142,6 +160,17 @@ object AppModule{
         return CartUseCases(
             addToCartUseCase = AddToCartUseCase(cartRepository),
             getAllCartItemUseCase = GetAllCartItemUseCase(cartRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileUseCases(
+        profileRepository: ProfileRepository
+    ): ProfileUseCases {
+        return ProfileUseCases(
+            updateProfileUseCase = UpdateProfileUseCase(profileRepository),
+            getProfileUseCase = GetProfileUseCase(profileRepository)
         )
     }
 
