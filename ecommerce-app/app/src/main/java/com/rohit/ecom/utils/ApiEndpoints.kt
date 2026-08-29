@@ -11,6 +11,7 @@ object ApiEndpoints {
 
     // Authenticated Endpoints (Token Required)
     val AUTHENTICATED_ENDPOINTS = listOf(
-        "carts"
+        "carts",
+        "profile"
     )
 }

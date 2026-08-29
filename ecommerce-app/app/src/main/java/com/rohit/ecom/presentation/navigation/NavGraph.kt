@@ -9,6 +9,7 @@ import com.rohit.ecom.presentation.screens.cartScreen.CartScreen
 import com.rohit.ecom.presentation.screens.detailsscreen.DetailsScreen
 import com.rohit.ecom.presentation.screens.homescreen.HomeScreen
 import com.rohit.ecom.presentation.screens.loginscreen.LoginScreen
+import com.rohit.ecom.presentation.screens.profilescreen.ProfileScreen
 import com.rohit.ecom.presentation.screens.signupscreen.SignUpScreen
 
 @Composable
@@ -53,6 +54,9 @@ fun NavGraph(
                 },
                 onCartClick = {
                     navController.navigate(Route.CartScreen)
+                },
+                onProfileClick = {
+                    navController.navigate(Route.ProfileScreen)
                 }
             )
         }
@@ -75,6 +79,19 @@ fun NavGraph(
                 onShopNowClick = {
                     navController.navigate(Route.HomeScreen) {
                         popUpTo(Route.CartScreen) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable<Route.ProfileScreen> {
+            ProfileScreen(
+                onBackClick = {
+                    navController.navigateUp()
+                },
+                onLogoutSuccess = {
+                    navController.navigate(Route.LoginScreen) {
+                        popUpTo(Route.HomeScreen) { inclusive = true }
                     }
                 }
             )
