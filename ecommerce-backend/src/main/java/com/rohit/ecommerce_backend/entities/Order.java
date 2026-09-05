@@ -5,14 +5,14 @@ import com.rohit.ecommerce_backend.utils.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Audited;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
-@Audited.Table(name = "orders")
+@Table(name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor

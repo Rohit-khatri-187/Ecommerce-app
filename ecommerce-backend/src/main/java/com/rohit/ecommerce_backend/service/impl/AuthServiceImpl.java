@@ -6,6 +6,8 @@ import com.rohit.ecommerce_backend.dto.RegisterRequestDto;
 import com.rohit.ecommerce_backend.dto.RegisterResponseDto;
 import com.rohit.ecommerce_backend.entities.User;
 import com.rohit.ecommerce_backend.enums.ROLE;
+import com.rohit.ecommerce_backend.exceptions.InvalidCredentialException;
+import com.rohit.ecommerce_backend.exceptions.NotFoundException;
 import com.rohit.ecommerce_backend.mappers.UserMapper;
 import com.rohit.ecommerce_backend.repositories.UserRepository;
 import com.rohit.ecommerce_backend.security.CustomUserDetail;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
         log.info("Inside the register");
 
         if(userRepository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exists");
+            throw new NotFoundException("Email already exists");
         }
 
         User user = User.builder()
@@ -76,8 +79,8 @@ public class AuthServiceImpl implements AuthService {
                     .role(user.getRole())
                     .build();
 
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new InvalidCredentialException("Invalid email or password");
         }
 
     }

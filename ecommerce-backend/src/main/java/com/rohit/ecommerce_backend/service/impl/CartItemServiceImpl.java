@@ -5,6 +5,7 @@ import com.rohit.ecommerce_backend.dto.CartItemResponseDto;
 import com.rohit.ecommerce_backend.entities.CartItem;
 import com.rohit.ecommerce_backend.entities.Product;
 import com.rohit.ecommerce_backend.entities.User;
+import com.rohit.ecommerce_backend.exceptions.NotFoundException;
 import com.rohit.ecommerce_backend.mappers.CartItemMapper;
 import com.rohit.ecommerce_backend.repositories.CartItemRepository;
 import com.rohit.ecommerce_backend.repositories.ProductRepository;
@@ -37,12 +38,12 @@ public class CartItemServiceImpl implements CartItemService {
 
         User user = securityUtils.getCurrentUser();
 
-        Optional<CartItem> existingItem = cartItemRepository.findCartItemByUserIdAndProductId(user.getId(),addToCartDto.productId());
+        Optional<CartItem> existingItem = cartItemRepository.findCartItemByUserIdAndProductId(user.getId(),addToCartDto.getProductId());
 
         if(existingItem.isPresent()){
 
             CartItem item = existingItem.get();
-            item.setQuantity(item.getQuantity() + addToCartDto.quantity());
+            item.setQuantity(item.getQuantity() + addToCartDto.getQuantity());
 
             CartItem savedCartItem = cartItemRepository.save(item);
 
@@ -50,13 +51,13 @@ public class CartItemServiceImpl implements CartItemService {
 
         }else {
 
-            Product product = productRepository.findById(addToCartDto.productId())
-                    .orElseThrow(() -> new RuntimeException("Product not found with id : " + addToCartDto.productId()) );
+            Product product = productRepository.findById(addToCartDto.getProductId())
+                    .orElseThrow(() -> new NotFoundException("Product not found with id : " + addToCartDto.getProductId()) );
 
             CartItem cartItem = CartItem.builder()
                     .user(user)
                     .product(product)
-                    .quantity(addToCartDto.quantity())
+                    .quantity(addToCartDto.getQuantity())
                     .build();
 
             CartItem savedCartItem = cartItemRepository.save(cartItem);
@@ -86,7 +87,7 @@ public class CartItemServiceImpl implements CartItemService {
     public void deleteCartItem(Long id) {
 
         CartItem cartItem = cartItemRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Cart Item not found with Id : "+ id) );
+                .orElseThrow(()-> new NotFoundException("Cart Item not found with Id : "+ id) );
 
         cartItemRepository.delete(cartItem);
 

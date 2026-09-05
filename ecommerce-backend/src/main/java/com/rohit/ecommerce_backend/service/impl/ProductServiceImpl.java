@@ -2,6 +2,7 @@ package com.rohit.ecommerce_backend.service.impl;
 
 import com.rohit.ecommerce_backend.dto.PagedResponse;
 import com.rohit.ecommerce_backend.entities.Product;
+import com.rohit.ecommerce_backend.exceptions.NotFoundException;
 import com.rohit.ecommerce_backend.repositories.ProductRepository;
 import com.rohit.ecommerce_backend.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class ProductServiceImpl  implements ProductService {
     @Override
     public Product getProductById(Long id){
         Product product = productRepository.findById(id)
-                .orElseThrow( () -> new RuntimeException("Product not fount with Id "+ id) );
+                .orElseThrow( () -> new NotFoundException("Product not fount with Id "+ id) );
 
         return product;
     }

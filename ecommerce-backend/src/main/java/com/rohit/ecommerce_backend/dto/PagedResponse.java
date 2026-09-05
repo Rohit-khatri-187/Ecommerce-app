@@ -4,11 +4,11 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record PagedResponse<T>(
-        List<T> content,
-        int pageNumber,
-        int pageSize,
-        long totalElements,
-        int totalPages,
-        boolean isLast
-) {}
+public class PagedResponse<T>{
+    private List<T> content;
+    private int pageNumber;
+    private int pageSize;
+    private long totalElements;
+    private int totalPages;
+    private boolean isLast;
+}
