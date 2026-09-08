@@ -1,6 +1,7 @@
 package com.rohit.ecommerce_backend.entities;
 
 import com.rohit.ecommerce_backend.enums.ORDER_STATUS;
+import com.rohit.ecommerce_backend.enums.PAYMENT_STATUS;
 import com.rohit.ecommerce_backend.utils.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,15 +35,20 @@ public class Order extends BaseEntity {
     @Column(nullable = false)
     private ORDER_STATUS orderStatus;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PAYMENT_STATUS paymentStatus;
+
 
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
 
-    public void addItem(OrderItem item) {
+    public void addOrderItem(OrderItem item) {
         items.add(item);
         item.setOrder(this);
     }

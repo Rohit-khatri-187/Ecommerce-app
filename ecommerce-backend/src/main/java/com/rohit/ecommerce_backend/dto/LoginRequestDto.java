@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LoginRequestDto {
 
-    @Schema(defaultValue = "khatrirohit1000@gmail.com")
+    @Schema(defaultValue = "test@gmail.com")
     @NotBlank(message = "Email is required")
     @Email(message = "Please Enter a valid Email")
     private String email;
 
-    @Schema(defaultValue = "rohit123")
+    @Schema(defaultValue = "test12345")
     @NotBlank(message = "Password is required")
     private String password;
 }

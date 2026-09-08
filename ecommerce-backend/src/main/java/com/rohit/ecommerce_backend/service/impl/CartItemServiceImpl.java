@@ -14,6 +14,7 @@ import com.rohit.ecommerce_backend.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -82,6 +83,13 @@ public class CartItemServiceImpl implements CartItemService {
                 .map(cartItemMapper::toDto)
                 .toList();
     }
+
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public void clearCartItem(List<CartItem> processedCartItem) {
+        cartItemRepository.deleteAll(processedCartItem);
+    }
+
 
     @Override
     public void deleteCartItem(Long id) {

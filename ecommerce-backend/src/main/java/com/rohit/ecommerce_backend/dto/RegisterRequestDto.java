@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegisterRequestDto {
 
-    @Schema(defaultValue ="Rohit khatri" )
+    @Schema(defaultValue ="test" )
     @NotBlank(message = "Name is required")
     private String name;
 
-    @Schema(defaultValue = "khatrirohit1000@gmail.com")
+    @Schema(defaultValue = "test@gmail.com")
     @NotBlank(message = "Email is required")
     @Email(message = "Please Enter a valid Email")
     private String email;
 
-    @Schema(defaultValue = "rohit123")
+    @Schema(defaultValue = "test12345")
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 32, message = "Password must be between 8 and 32 characters")
     private String password;

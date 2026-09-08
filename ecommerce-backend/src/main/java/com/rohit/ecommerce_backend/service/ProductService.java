@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface ProductService {
 
-    PagedResponse<Product> getAllProducts(Pageable pageable);
+    PagedResponse<List<Product>> getAllProducts(Pageable pageable);
 
     Product getProductById(Long id);
+
+    void updateStockAfterOrderItemCancelation(Long productId , Integer addedQuantity);
 
 }

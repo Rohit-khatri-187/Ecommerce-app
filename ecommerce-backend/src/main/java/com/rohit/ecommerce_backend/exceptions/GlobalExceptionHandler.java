@@ -34,6 +34,15 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(HttpStatus.UNAUTHORIZED,ex.getMessage());
     }
 
+    @ExceptionHandler(OutOfStockException.class)
+    private ResponseEntity<ExceptionResponse> handleOutOfStockException(OutOfStockException ex){
+        return buildErrorResponse(HttpStatus.UNPROCESSABLE_CONTENT,ex.getMessage());
+    }
+
+    @ExceptionHandler(EmptyException.class)
+    private ResponseEntity<ExceptionResponse> handleEmptyException(EmptyException ex){
+        return buildErrorResponse(HttpStatus.UNPROCESSABLE_CONTENT,ex.getMessage());
+    }
 
     private ResponseEntity<ExceptionResponse> buildErrorResponse(
             HttpStatus status ,

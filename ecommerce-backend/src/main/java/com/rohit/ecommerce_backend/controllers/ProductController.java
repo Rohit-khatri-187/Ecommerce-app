@@ -3,6 +3,7 @@ package com.rohit.ecommerce_backend.controllers;
 import com.rohit.ecommerce_backend.dto.PagedResponse;
 import com.rohit.ecommerce_backend.entities.Product;
 import com.rohit.ecommerce_backend.service.ProductService;
+import com.rohit.ecommerce_backend.utils.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "Product Endpoints" , description = "This is a endpoints to add the product and get product data : ")
 @RequestMapping("/products")
@@ -33,10 +36,10 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "successful operation")
     })
     @GetMapping
-    public ResponseEntity<PagedResponse<Product>> getAllProducts(
+    public ResponseEntity<PagedResponse<List<Product>>> getAllProducts(
             @PageableDefault(page = 0, size = 20) Pageable pageable) {
 
-        PagedResponse<Product> response = productService.getAllProducts(pageable);
+        PagedResponse<List<Product>> response = productService.getAllProducts(pageable);
         return ResponseEntity.ok(response);
     }
 

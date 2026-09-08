@@ -1,5 +1,6 @@
 package com.rohit.ecommerce_backend.entities;
 
+import com.rohit.ecommerce_backend.enums.ORDER_ITEM_STATUS;
 import com.rohit.ecommerce_backend.utils.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,5 +28,9 @@ public class OrderItem extends BaseEntity {
     private Long unitPrice;
 
     @Column(nullable = false)
-    private Long quantity;
+    private Integer quantity;
+
+    @Enumerated(EnumType.STRING)
+    private ORDER_ITEM_STATUS orderItemStatus;
+
 }

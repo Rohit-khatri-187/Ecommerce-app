@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Tag(name = "Auth endpoints : " , description = "These are the endpoints for the Auth ( login & register ) :  ")
+@Tag(name = "Auth endpoints " , description = "These are the endpoints for the Auth ( login & register ) :  ")
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 @RestController
@@ -26,7 +26,7 @@ public class AuthController extends BaseController {
 
     @Operation(
             summary = "Register User",
-            description = "User have to first register then login "
+            description = "User have to first register "
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation")
