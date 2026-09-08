@@ -1,5 +1,6 @@
 package com.rohit.ecommerce_backend.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -11,10 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LoginRequestDto {
 
+    @Schema(defaultValue = "test@gmail.com")
     @NotBlank(message = "Email is required")
     @Email(message = "Please Enter a valid Email")
     private String email;
 
+    @Schema(defaultValue = "test12345")
     @NotBlank(message = "Password is required")
     private String password;
 }

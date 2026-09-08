@@ -1,6 +1,7 @@
 package com.rohit.ecommerce_backend.dto;
 
 import com.rohit.ecommerce_backend.enums.ORDER_STATUS;
+import com.rohit.ecommerce_backend.enums.PAYMENT_STATUS;
 import lombok.*;
 
 import java.time.Instant;
@@ -22,6 +23,8 @@ public class OrderResponseDto {
     private String phoneNumber;
 
     private ORDER_STATUS orderStatus;
+
+    private PAYMENT_STATUS paymentStatus;
 
     private List<OrderItemResponseDto> items;
 

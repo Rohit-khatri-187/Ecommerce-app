@@ -15,7 +15,7 @@ public class OrderItemResponseDto {
     private String productName;
     private String imageUrl;
 
-    private Long quantity;
+    private Integer quantity;
     private Long unitPrice;
     private Long totalAmount;
 }

@@ -1,6 +1,7 @@
 package com.rohit.ecommerce_backend.security;
 
 import com.rohit.ecommerce_backend.entities.User;
+import com.rohit.ecommerce_backend.exceptions.NotFoundException;
 import com.rohit.ecommerce_backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new RuntimeException("Email not found") );
+                .orElseThrow(() -> new NotFoundException("Email not found") );
 
         return CustomUserDetail.builder()
                 .user(user)

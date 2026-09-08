@@ -41,7 +41,7 @@ class ProfileScreenViewModel @Inject constructor(
         viewModelScope.launch {
             profileUseCases.updateProfileUseCase(updateProfileRequest).collect { result ->
                 _updateProfileState.value = result
-                // Optimization: Update the main profile state directly if update is successful
+                //  Update the main profile state directly if update is successful
                 if (result is ApiResult.Success) {
                     _getProfileUiState.value = ApiResult.Success(result.data)
                 }

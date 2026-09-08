@@ -32,7 +32,8 @@ public class SecurityFilter {
                 .authorizeHttpRequests(auth ->
                         auth
 
-                                .requestMatchers("/auth/login", "/auth/register","/h2-console/**").permitAll()
+                                .requestMatchers("/auth/login", "/auth/register", "/api-docs",
+                                        "/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**","/h2-console/**","/api-docs").permitAll()
                                 .requestMatchers("/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
