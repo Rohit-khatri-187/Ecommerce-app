@@ -12,6 +12,6 @@ public interface ProductService {
 
     Product getProductById(Long id);
 
-    void updateStockAfterOrderItemCancelation(Long productId , Integer addedQuantity);
+    void updateStockAfterOrderItemCancellation(Long productId , Integer addedQuantity);
 
 }
