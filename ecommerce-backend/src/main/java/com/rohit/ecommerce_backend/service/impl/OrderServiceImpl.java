@@ -119,12 +119,25 @@ public class OrderServiceImpl implements OrderService {
             );
         }
 
-        productService.updateStockAfterOrderItemCancelation(orderItem.getProduct().getId(),orderItem.getQuantity());
         orderItem.setOrderItemStatus(ORDER_ITEM_STATUS.CANCELLED);
+        productService.updateStockAfterOrderItemCancellation(orderItem.getProduct().getId(),orderItem.getQuantity());
 
 
     }
 
+    @Override
+    public List<OrderItemResponseDto> getAllOrderItems() {
+
+        User user = securityUtils.getCurrentUser();
+
+        List<Order> orders =
+                orderRepository.findAllOrdersByUserId(user.getId());
+
+        return orders.stream()
+                .flatMap(order -> order.getItems().stream())
+                .map(orderMapper::toOrderItemResponseDto)
+                .toList();
+    }
 
 
 }

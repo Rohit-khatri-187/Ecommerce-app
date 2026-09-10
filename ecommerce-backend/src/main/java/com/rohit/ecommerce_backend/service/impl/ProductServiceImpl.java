@@ -54,7 +54,7 @@ public class ProductServiceImpl  implements ProductService {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void updateStockAfterOrderItemCancelation(Long productId , Integer addedQuantity){
+    public void updateStockAfterOrderItemCancellation(Long productId , Integer addedQuantity){
         Product product = productRepository.findById(productId)
                 .orElseThrow( () -> new NotFoundException("Product not fount with Id "+ productId) );
 

@@ -1,5 +1,6 @@
 package com.rohit.ecommerce_backend.entities;
 
+import com.rohit.ecommerce_backend.enums.ORDER_ITEM_STATUS;
 import com.rohit.ecommerce_backend.enums.ORDER_STATUS;
 import com.rohit.ecommerce_backend.enums.PAYMENT_STATUS;
 import com.rohit.ecommerce_backend.utils.BaseEntity;
@@ -52,7 +53,6 @@ public class Order extends BaseEntity {
         items.add(item);
         item.setOrder(this);
     }
-
 
 
 }

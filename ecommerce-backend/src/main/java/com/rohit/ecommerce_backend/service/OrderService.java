@@ -11,5 +11,6 @@ public interface OrderService {
 
     void cancelOrderItem(Long orderItemId);
 
+    public List<OrderItemResponseDto> getAllOrderItems();
 
 }
