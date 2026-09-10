@@ -1,5 +1,6 @@
 package com.rohit.ecommerce_backend.dto;
 
+import com.rohit.ecommerce_backend.enums.ORDER_ITEM_STATUS;
 import lombok.*;
 
 @Getter
@@ -18,4 +19,5 @@ public class OrderItemResponseDto {
     private Integer quantity;
     private Long unitPrice;
     private Long totalAmount;
+    private ORDER_ITEM_STATUS orderItemStatus;
 }
