@@ -54,7 +54,7 @@ public class OrderController extends BaseController {
 
        orderService.cancelOrderItem(orderItemId);
 
-        return buildResponse(null,"Order is placed successfully");
+        return buildResponse(null,"Order is cancelled successfully");
     }
 
 

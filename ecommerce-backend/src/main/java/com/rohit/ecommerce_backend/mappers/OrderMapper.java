@@ -50,6 +50,7 @@ public class OrderMapper {
                 .quantity(orderItem.getQuantity())
                 .unitPrice(orderItem.getUnitPrice())
                 .totalAmount(totalAmount)
+                .orderItemStatus(orderItem.getOrderItemStatus())
                 .build();
     }
 
