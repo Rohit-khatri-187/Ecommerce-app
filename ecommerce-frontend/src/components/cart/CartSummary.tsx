@@ -1,8 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import PlaceOrderModal from "@/components/cart/PlaceOrderModal";
 import type { CartItem } from "@/types/cart";
 
 const CartSummary = ({ items }: { items: CartItem[] }) => {
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const subtotal = items.reduce((total, item) => total + item.totalAmount, 0);
 
   return (
@@ -22,16 +26,21 @@ const CartSummary = ({ items }: { items: CartItem[] }) => {
         <span className="font-bold text-slate-950">Total</span>
         <span className="text-2xl font-bold text-slate-950">Rs{subtotal.toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>
       </div>
-      <Link
-        href="/checkout"
+      <button
+        type="button"
+        onClick={() => setIsOrderModalOpen(true)}
         className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 text-sm font-bold text-white shadow-lg shadow-emerald-700/20 transition hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-100"
       >
         Continue to checkout
         <ArrowRight className="h-4 w-4" />
-      </Link>
+      </button>
       <p className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
         <ShieldCheck className="h-4 w-4 text-emerald-700" /> Secure checkout
       </p>
+      <PlaceOrderModal
+        isOpen={isOrderModalOpen}
+        onClose={() => setIsOrderModalOpen(false)}
+      />
     </aside>
   );
 };

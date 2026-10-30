@@ -1,27 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { API_BASE_URL, CART_ROUTE } from "@/constants/apiRoutes";
+import { getAuthHeaders } from "@/config/authHeaders";
 import type {
   AddToCartRequest,
   AddToCartResponse,
   DeleteCartItemResponse,
   GetCartItemResponse,
 } from "@/types/cart";
-
-async function getAuthHeaders(): Promise<Record<string, string>> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("auth-token")?.value;
-
-  if (!token) {
-    throw new Error("You must be logged in to access the cart.");
-  }
-
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-}
 
 async function getErrorMessage(response: Response, fallback: string) {
   const body = await response.json().catch(() => null);

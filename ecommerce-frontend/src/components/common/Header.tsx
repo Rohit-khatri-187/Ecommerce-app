@@ -8,10 +8,22 @@ import { Suspense } from "react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import ProfileDropDown from "./ProfileDropDown";
+import { getProfile } from "@/services/profileApi";
+import type { UserProfile } from "@/types/profile";
 
 const Header = async () => {
   const cookieStore = await cookies();
   const isLoggedIn = Boolean(cookieStore.get("auth-token")?.value);
+  let profile: UserProfile | null = null;
+
+  if (isLoggedIn) {
+    try {
+      const profileResponse = await getProfile();
+      if (profileResponse.success) profile = profileResponse.content;
+    } catch {
+      profile = null;
+    }
+  }
 
   return (
     <header className="bg-white py-5">
@@ -29,7 +41,7 @@ const Header = async () => {
           <SearchBar />
           <CartIcon />
           {isLoggedIn ? (
-            <ProfileDropDown />
+            <ProfileDropDown profile={profile} />
           ) : (
             <Link
               href="/login"
