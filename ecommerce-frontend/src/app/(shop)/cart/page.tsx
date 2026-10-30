@@ -1,9 +1,13 @@
-import React from 'react'
+import { Suspense } from "react";
+import CartPageContent from "@/components/cart/CartPageContent";
+import Loading from "@/components/common/Loading";
 
 const CartPage = () => {
   return (
-    <div>CartPage</div>
-  )
-}
+    <Suspense fallback={<Loading/> }>
+      <CartPageContent />
+    </Suspense>
+  );
+};
 
-export default CartPage
+export default CartPage;
