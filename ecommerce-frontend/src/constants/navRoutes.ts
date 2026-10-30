@@ -2,8 +2,7 @@ export const NAV_ROUTES = [
   { title: "Home", href: "/" },
   { title: "Shop", href: "/products" },
   { title: "Blog", href: "/blog" },
-  { title: "Contact", href: "/contact" },
-  { title: "Hot deal", href: "/deal" },
+  { title: "Contact", href: "/contact" }
 ];
 
 export const quickLinksData = [

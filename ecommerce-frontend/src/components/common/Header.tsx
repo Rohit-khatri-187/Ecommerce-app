@@ -3,7 +3,6 @@ import Logo from "./Logo";
 import HeaderMenu from "./HeaderMenu";
 import SearchBar from "./SearchBar";
 import CartIcon from "./CartIcon";
-import FavouriteButton from "./FavouriteButton";
 import MobileMenu from "./MobileMenu";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
@@ -29,7 +28,6 @@ const Header = async () => {
         <div className="w-auto md:w-13 flex items-center justify-end gap-5">
           <SearchBar />
           <CartIcon />
-          <FavouriteButton />
           {isLoggedIn ? (
             <ProfileDropDown />
           ) : (
