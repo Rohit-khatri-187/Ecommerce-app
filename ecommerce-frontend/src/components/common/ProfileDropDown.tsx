@@ -6,6 +6,7 @@ import { CircleUserRound, LoaderCircle, LogOut, Pencil } from "lucide-react";
 import { logout } from "@/services/authApi";
 import ProfileEditModal from "./ProfileEditModal";
 import type { UserProfile } from "@/types/profile";
+import { useCartStore } from "@/store/cartStore";
 
 const ProfileDropDown = ({ profile }: { profile: UserProfile | null }) => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const ProfileDropDown = ({ profile }: { profile: UserProfile | null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const resetCart = useCartStore((state) => state.resetCart);
 
   useEffect(() => {
     const closeMenu = (event: MouseEvent) => {
@@ -41,6 +43,7 @@ const ProfileDropDown = ({ profile }: { profile: UserProfile | null }) => {
 
     try {
       await logout();
+      resetCart();
       setIsOpen(false);
       router.push("/");
       router.refresh();

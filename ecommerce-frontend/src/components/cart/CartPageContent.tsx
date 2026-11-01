@@ -1,21 +1,22 @@
+"use client";
+
+import { useEffect } from "react";
 import Container from "@/components/common/Container";
 import CartItemCard from "@/components/cart/CartItemCard";
 import CartSummary from "@/components/cart/CartSummary";
 import NoCartItems from "@/components/cart/NoCartItems";
-import { getAllProducts } from "@/services/cartApi";
-import type { CartItem } from "@/types/cart";
+import { useCartStore } from "@/store/cartStore";
 
-const CartPageContent = async () => {
-  let items: CartItem[] = [];
-  let errorMessage = "";
+const CartPageContent = () => {
+  const items = useCartStore((state) => state.items);
+  const hasLoaded = useCartStore((state) => state.hasLoaded);
+  const isLoading = useCartStore((state) => state.isLoading);
+  const errorMessage = useCartStore((state) => state.errorMessage);
+  const refreshCart = useCartStore((state) => state.refreshCart);
 
-  try {
-    const cart = await getAllProducts();
-    items = cart.success ? cart.content ?? [] : [];
-    if (!cart.success) errorMessage = cart.message || "Unable to load your cart.";
-  } catch (error) {
-    errorMessage = error instanceof Error ? error.message : "Unable to load your cart.";
-  }
+  useEffect(() => {
+    refreshCart();
+  }, [refreshCart]);
 
   return (
     <section className="bg-slate-50 py-10 sm:py-14">
@@ -25,7 +26,11 @@ const CartPageContent = async () => {
           <h1 className="mt-2 text-3xl font-bold text-slate-950 sm:text-4xl">Shopping cart</h1>
         </div>
 
-        {errorMessage ? (
+        {isLoading && !hasLoaded ? (
+          <div className="rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center text-sm text-slate-500">
+            Loading cart...
+          </div>
+        ) : errorMessage ? (
           <div className="rounded-2xl border border-red-200 bg-white px-6 py-10 text-center">
             <h2 className="text-2xl font-bold text-slate-950">Unable to load your cart</h2>
             <p className="mt-2 text-sm text-slate-600">{errorMessage}</p>
