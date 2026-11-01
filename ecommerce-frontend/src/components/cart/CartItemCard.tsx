@@ -2,9 +2,8 @@
 
 import { useTransition } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { LoaderCircle, Trash2 } from "lucide-react";
-import { deleteCartItem } from "@/services/cartApi";
+import { useCartStore } from "@/store/cartStore";
 import type { CartItem } from "@/types/cart";
 
 type CartItemCardProps = {
@@ -12,13 +11,12 @@ type CartItemCardProps = {
 };
 
 const CartItemCard = ({ item }: CartItemCardProps) => {
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const removeCartItem = useCartStore((state) => state.removeCartItem);
 
   const handleRemove = () => {
     startTransition(async () => {
-      await deleteCartItem(item.id);
-      router.refresh();
+      await removeCartItem(item.id);
     });
   };
 

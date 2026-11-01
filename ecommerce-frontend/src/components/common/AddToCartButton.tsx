@@ -2,8 +2,7 @@
 
 import { useState, type MouseEvent } from "react";
 import { LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { addToCart } from "@/services/cartApi";
+import { useCartStore } from "@/store/cartStore";
 import type { Product } from "@/types/product";
 
 type AddToCartButtonProps = {
@@ -11,9 +10,9 @@ type AddToCartButtonProps = {
 };
 
 const AddToCartButton = ({ product }: AddToCartButtonProps) => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const addCartItem = useCartStore((state) => state.addCartItem);
 
   const handleAddToCart = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -22,14 +21,13 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
     setIsLoading(true);
 
     try {
-      const response = await addToCart({ productId: product.id, quantity: 1 });
+      const response = await addCartItem({ productId: product.id, quantity: 1 });
 
       if (!response.success) {
         throw new Error(response.message || "Could not add this item to the cart.");
       }
 
       setMessage("Added to cart");
-      router.refresh();
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Could not add this item to the cart.");
     } finally {

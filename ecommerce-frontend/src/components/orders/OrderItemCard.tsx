@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTransition, useState } from "react";
-import { LoaderCircle, Trash2 } from "lucide-react";
+import { Ban, LoaderCircle } from "lucide-react";
 import { deleteOrderItem } from "@/services/orderApi";
 import type { OrderItem } from "@/types/order";
 
@@ -23,19 +23,20 @@ const OrderItemCard = ({ item }: { item: OrderItem }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState("");
+  const isCancelled = item.orderItemStatus?.trim().toUpperCase() === "CANCELLED";
 
-  const handleDelete = () => {
+  const handleCancel = () => {
     setErrorMessage("");
 
     startTransition(async () => {
       try {
         const response = await deleteOrderItem(item.orderItemId);
         if (!response.success) {
-          throw new Error(response.message || "Could not remove this order item.");
+          throw new Error(response.message || "Could not cancel this order item.");
         }
         router.refresh();
       } catch (error) {
-        setErrorMessage(error instanceof Error ? error.message : "Could not remove this order item.");
+        setErrorMessage(        error instanceof Error ? error.message : "Could not cancel this order item.");
       }
     });
   };
@@ -70,16 +71,17 @@ const OrderItemCard = ({ item }: { item: OrderItem }) => {
             </div>
             <button
               type="button"
-              onClick={handleDelete}
-              disabled={isPending}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition hover:bg-red-50 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60"
-              aria-label={`Remove ${item.productName} from order`}
+              onClick={handleCancel}
+              disabled={isPending || isCancelled}
+              className="flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg px-2.5 text-xs font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400 disabled:opacity-70"
+              aria-label={isCancelled ? `${item.productName} is cancelled` : `Cancel ${item.productName} order`}
             >
               {isPending ? (
-                <LoaderCircle className="h-5 w-5 animate-spin" />
+                <LoaderCircle className="h-4 w-4 animate-spin" />
               ) : (
-                <Trash2 className="h-5 w-5" />
+                <Ban className="h-4 w-4" />
               )}
+              {isPending ? "Cancelling" : "Cancel"}
             </button>
           </div>
 

@@ -10,6 +10,7 @@ import Link from "next/link";
 import ProfileDropDown from "./ProfileDropDown";
 import { getProfile } from "@/services/profileApi";
 import type { UserProfile } from "@/types/profile";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = async () => {
   const cookieStore = await cookies();
@@ -40,6 +41,7 @@ const Header = async () => {
         <div className="w-auto md:w-13 flex items-center justify-end gap-5">
           <SearchBar />
           <CartIcon />
+          <ThemeToggle />
           {isLoggedIn ? (
             <ProfileDropDown profile={profile} />
           ) : (

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { LoaderCircle, MapPin, Phone, X } from "lucide-react";
 import { placeOrder } from "@/services/orderApi";
 import type { PlaceOrderRequest } from "@/types/order";
+import { useCartStore } from "@/store/cartStore";
 
 type PlaceOrderModalProps = {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const PlaceOrderModal = ({ isOpen, onClose }: PlaceOrderModalProps) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const setCartItems = useCartStore((state) => state.setItems);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -53,6 +55,7 @@ const PlaceOrderModal = ({ isOpen, onClose }: PlaceOrderModalProps) => {
       }
 
       onClose();
+      setCartItems([]);
       setFormData({ address: "", phoneNumber: "" });
       router.refresh();
     } catch (error) {
