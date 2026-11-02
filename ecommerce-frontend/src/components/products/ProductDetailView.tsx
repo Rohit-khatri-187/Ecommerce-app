@@ -1,8 +1,10 @@
+import { connection } from "next/server";
 import { getProductById } from "@/services/productApi";
 import Image from "next/image";
 import AddToCartButton from "../common/AddToCartButton";
 
 export async function ProductDetailView({ id }: { id: number }) {
+  await connection();
   const product = await getProductById(id);
 
   return (

@@ -1,4 +1,6 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+export const API_BASE_URL =
+  process.env.API_BASE_URL ??
+  "http://ecommerce-backend:8090/api/v1";
 
 export const AUTH_ROUTE = {
   register: "/auth/register",
@@ -27,19 +29,8 @@ export const ORDER_ROUTE = {
   deleteOrderItemById: (id: number) => `/orders/${id}`,
 };
 
-export const PUBLIC_ROUTES = [
-  "/",
-  "/login",
-  "/signup",
-  "/products",
-  "/blog",
-];
+export const PUBLIC_ROUTES = ["/", "/login", "/signup", "/products", "/blog"];
 
 export const AUTH_ROUTES = ["/login", "/signup"];
 
-export const PRIVATE_ROUTES = [
-  "/cart",
-  "/profile",
-  "/orders",
-  "/checkout",
-];
+export const PRIVATE_ROUTES = ["/cart", "/profile", "/orders", "/checkout"];

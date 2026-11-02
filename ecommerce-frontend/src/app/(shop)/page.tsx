@@ -4,6 +4,7 @@ import HomeBanner from "@/components/common/HomeBanner";
 import ProductGrid from "@/components/products/ProductGrid";
 import Loading from "@/components/common/Loading";
 
+
 const HomePage = () => {
   return (
     <Container>

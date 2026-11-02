@@ -1,13 +1,9 @@
+import { connection } from "next/server";
 import { getProducts } from "@/services/productApi";
 import ProductCard from "./ProductCard";
-import { cacheLife } from "next/cache";
 
 const ProductGrid = async () => {
-
-  'use cache'
-  cacheLife('hours')
-
-
+  await connection();
   const data = await getProducts();
 
   if (!data?.content || data.content.length === 0) {
