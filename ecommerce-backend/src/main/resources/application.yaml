@@ -2,11 +2,19 @@ spring:
   application:
     name: ecommerce-backend
 
+  threads:
+    virtual:
+      enabled: true
+
   datasource:
     url: jdbc:h2:mem:ecommerce
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
+    hikari:
+      maximum-pool-size: 14
+      minimum-idle: 7
 
   jpa:
     hibernate:
@@ -34,4 +42,22 @@ jwt:
   secret: ${JWT_SECRET:V7r9!xP2s#LqZ8@MjUe6^TfCwY4bHnKd}
   expiration: ${JWT_EXPIRATION_TIME:604800000}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  otlp:
+    metrics:
+      export:
+        url: ${METRICS_ENDPOINT:http://localhost:4318/v1/metrics}
 
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: ${TRACE_ENDPOINT:http://localhost:4318/v1/traces}
+
+  tracing:
+    sampling:
+      probability: 1.0

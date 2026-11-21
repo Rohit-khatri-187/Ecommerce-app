@@ -9,6 +9,7 @@ import com.rohit.ecommerce_backend.enums.ROLE;
 import com.rohit.ecommerce_backend.exceptions.InvalidCredentialException;
 import com.rohit.ecommerce_backend.exceptions.NotFoundException;
 import com.rohit.ecommerce_backend.mappers.UserMapper;
+import com.rohit.ecommerce_backend.metrics.UserMetrics;
 import com.rohit.ecommerce_backend.repositories.UserRepository;
 import com.rohit.ecommerce_backend.security.CustomUserDetail;
 import com.rohit.ecommerce_backend.security.JwtUtils;
@@ -33,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final UserMetrics userMetrics;
 
     @Override
     public RegisterResponseDto register(RegisterRequestDto request) {
@@ -51,6 +53,8 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         User savedUser = userRepository.save(user);
+
+        userMetrics.incrementRegisteredUsers();
 
         return userMapper.toRegisterResponseDto(savedUser);
     }
